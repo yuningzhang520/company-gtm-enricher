@@ -1,0 +1,56 @@
+company,domain,aliases,lists,input_name,identity_source,identity_notes,verified_at
+SpaceXAI,x.ai,xAI,ai_infra_labs,spacexAI,https://x.ai/,Current official brand; scope is the xAI team rather than all SpaceX employees.,2026-09-17
+CoreWeave,coreweave.com,,ai_infra_labs,CoreWeave,https://www.coreweave.com/,Official company website.,2026-09-17
+Nebius,nebius.com,,ai_infra_labs,Nebius,https://nebius.com/,Official company website.,2026-09-17
+IREN,iren.com,,ai_infra_labs,Iren,https://www.iren.com/,AI infrastructure company; capitalization normalized.,2026-09-17
+Lambda,lambda.ai,,ai_infra_labs,Lambda,https://lambda.ai/,AI compute company; domain disambiguates the name.,2026-09-17
+Perplexity,perplexity.ai,,ai_infra_labs,Perplexity,https://www.perplexity.ai/,Official company website.,2026-09-17
+Decagon,decagon.ai,,ai_infra_labs;agent_execution,Decagon,https://decagon.ai/,Official company website.,2026-09-17
+Crusoe,crusoe.ai,,ai_infra_labs,Crusoe,https://www.crusoe.ai/,Official company website.,2026-09-17
+Cohere,cohere.com,,ai_infra_labs,Cohere,https://cohere.com/,Official company website.,2026-09-17
+LangChain,langchain.com,,ai_infra_labs,langchain,https://www.langchain.com/,Company employment required; framework use alone is insufficient.,2026-09-17
+CrewAI,crewai.com,,ai_infra_labs;agent_execution,CrewAI,https://crewai.com/,Company employment required; framework use alone is insufficient.,2026-09-17
+OpenCode,opencode.ai,,ai_infra_labs;app_building,Opencode,https://anoma.ly/,Creator Anomaly verified but generic alias removed after first-run namesake ambiguity; require an OpenCode team connection.,2026-09-17
+ElevenLabs,elevenlabs.io,,ai_infra_labs,ElevenLabs,https://elevenlabs.io/,Official company website.,2026-09-17
+Ollama,ollama.com,,ai_infra_labs,Ollama,https://ollama.com/,Company employment required; tool use alone is insufficient.,2026-09-17
+Midjourney,midjourney.com,,ai_infra_labs,Midjourney,https://www.midjourney.com/,Official company website.,2026-09-17
+Sierra,sierra.ai,,ai_infra_labs;agent_execution,Sierra,https://sierra.ai/,Customer-service AI company; domain disambiguates the name.,2026-09-17
+Together AI,together.ai,,ai_infra_labs,Together AI,https://www.together.ai/,Official company website.,2026-09-17
+Runway,runway.com,,ai_infra_labs,Runway,https://runwayml.com/,Original runwayml.com redirects to runway.com.,2026-09-17
+Replit,replit.com,Repl.it,ai_infra_labs;app_building,Replit,https://replit.com/,Known earlier company name retained from the verified pilot input.,2026-09-17
+Harvey,harvey.ai,,ai_infra_labs;agent_execution,Harvey,https://www.harvey.ai/,Legal AI company; domain disambiguates the name.,2026-09-17
+Deepgram,deepgram.com,,ai_infra_labs,Deepgram,https://deepgram.com/,Official company website.,2026-09-17
+Descript,descript.com,,ai_infra_labs,Descript,https://www.descript.com/,Official company website.,2026-09-17
+Thinking Machines Lab,thinkingmachines.ai,,ai_infra_labs,Thinking Machines Lab,https://thinkingmachines.ai/,Official company website.,2026-09-17
+OpenAI,openai.com,,ai_infra_labs,OpenAI,https://openai.com/,Official company website.,2026-09-17
+Anthropic,anthropic.com,,ai_infra_labs,Anthropic,https://www.anthropic.com/,Official company website.,2026-09-17
+Cursor,cursor.com,Anysphere,ai_infra_labs;app_building,Cursor,https://cursor.com/terms-of-service,Official terms identify Anysphere as the maker of Cursor.,2026-09-17
+Applied Intuition,appliedintuition.com,,ai_infra_labs,Applied Intuition,https://www.appliedintuition.com/,Official company website.,2026-09-17
+Modal,modal.com,Modal Labs,ai_infra_labs,Modal Labs,https://modal.com/,AI infrastructure company; input company spelling retained as an alias.,2026-09-17
+Ramp,ramp.com,,ai_infra_labs,Ramp,https://ramp.com/,Spend-management company; domain disambiguates the name.,2026-09-17
+Fireworks AI,fireworks.ai,Fireworks,ai_infra_labs,Fireworks AI,https://fireworks.ai/,Official website uses the Fireworks brand.,2026-09-17
+Cognition,cognition.com,,ai_infra_labs;app_building,Cognition (Cognition/Devin),https://cognition.ai/,Devin mapped to its maker Cognition; official website redirects to cognition.com.,2026-09-17
+Paraform,paraform.com,,ai_infra_labs,Paraform,https://www.paraform.com/,Official company website.,2026-09-17
+CREAO,creao.ai,,ai_infra_labs,CREAO.ai,https://creao.ai/,Official company website.,2026-09-17
+Writer,writer.com,,ai_infra_labs;agent_execution,Writer.com (Writer),https://writer.com/,Enterprise AI company; domain disambiguates the name.,2026-09-17
+Vercel,vercel.com,,app_building,Vercel/v0,https://vercel.com/,v0 product mapped to employer Vercel.,2026-09-17
+Emergent,emergent.sh,,app_building,Emergent,https://emergent.sh/,App-building company; domain disambiguates the name.,2026-09-17
+Lovable,lovable.dev,,app_building,Lovable,https://lovable.dev/,Official company website.,2026-09-17
+StackBlitz,stackblitz.com,Bolt.new,app_building,Bolt,https://support.bolt.new/get-started/intro-bolt,Bolt app builder mapped to its developer StackBlitz; excludes unrelated Bolt companies.,2026-09-17
+Base44,base44.com,,app_building,Base44,https://base44.com/,Retain the Base44 team as the target; do not expand to a parent company's full workforce.,2026-09-17
+Augment Code,augmentcode.com,Augment,app_building,Augment,https://www.augmentcode.com/,Official brand and domain disambiguate the input.,2026-09-17
+Cline,cline.bot,,app_building,Cline,https://cline.bot/,Company employment required; open-source contribution alone is insufficient.,2026-09-17
+OpenHands,openhands.dev,All Hands AI,app_building,OpenHands,https://www.openhands.dev/privacy,Official privacy policy identifies All Hands AI as the service operator.,2026-09-17
+Glean,glean.com,,agent_execution,Glean,https://www.glean.com/,Enterprise AI company; domain disambiguates the name.,2026-09-17
+Legora,legora.com,,agent_execution,Legora,https://legora.com/,Official company website.,2026-09-17
+Fin,fin.ai,Intercom,agent_execution,Fin,https://fin.ai/about,Official history says Intercom became Fin in 2026; earlier name retained for indexed profiles.,2026-09-17
+Pylon,usepylon.com,,agent_execution,Pylon,https://www.usepylon.com/,B2B support company; domain disambiguates the name.,2026-09-17
+Dust,dust.tt,,agent_execution,Dust,https://dust.tt/,Enterprise AI company; domain disambiguates the name.,2026-09-17
+Unify,unifygtm.com,,agent_execution,Unify,https://www.unifygtm.com/,Outbound sales company; domain disambiguates the name.,2026-09-17
+Rogo,rogo.com,,agent_execution,Rogo,https://rogo.ai/,Original rogo.ai redirects to rogo.com.,2026-09-17
+StackAI,stackai.com,Stack AI,agent_execution,StackAI,https://stack-ai.com/,Original stack-ai.com redirects to stackai.com.,2026-09-17
+Hebbia,hebbia.com,,agent_execution,Hebbia,https://hebbia.ai/,Original hebbia.ai redirects to hebbia.com.,2026-09-17
+Lindy,lindy.ai,,agent_execution,Lindy,https://www.lindy.ai/,Official company website.,2026-09-17
+Relevance AI,relevanceai.com,,agent_execution,Relevance AI,https://relevanceai.com/,Official company website.,2026-09-17
+Gumloop,gumloop.com,,agent_execution,Gumloop,https://www.gumloop.com/,Official company website.,2026-09-17
+Clay,clay.com,,agent_execution,Clay,https://www.clay.com/,GTM company; domain disambiguates the name.,2026-09-17

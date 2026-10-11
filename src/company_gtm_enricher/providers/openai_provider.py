@@ -47,7 +47,7 @@ class OpenAIEnrichmentProvider:
     ) -> None:
         if not api_key:
             raise ValueError(
-                "OPENAI_API_KEY is not set. Add it to your environment or switch the app to the mock provider."
+                "OPENAI_API_KEY is not set. Add it in the API keys sidebar or local .env, or switch to the mock provider."
             )
 
         try:
@@ -60,8 +60,38 @@ class OpenAIEnrichmentProvider:
         self._client = OpenAI(api_key=api_key, timeout=timeout_seconds)
         self._model = model
 
+    def _create_completion(self, **kwargs: Any) -> Any:
+        from openai import APIConnectionError, APIError
+
+        try:
+            return self._client.chat.completions.create(**kwargs)
+        except APIError as exc:
+            # SDK error messages/bodies can contain rejected credentials. Only
+            # fixed guidance and a numeric HTTP status may reach the UI/export.
+            status = getattr(exc, "status_code", None)
+            status = status if type(status) is int and 100 <= status <= 599 else None
+            prefix = "OpenAI request failed" + (f" (HTTP {status})" if status else "") + ". "
+            if status == 401:
+                guidance = "Check the OpenAI API key in the sidebar or local .env."
+            elif status == 403:
+                guidance = "Check the API key's project and model permissions."
+            elif status == 429:
+                if getattr(exc, "code", None) == "insufficient_quota":
+                    guidance = "Check the OpenAI project's API credits and billing quota."
+                else:
+                    guidance = "A rate or quota limit was reached. Check API limits and billing before retrying."
+            elif isinstance(exc, APIConnectionError):
+                guidance = "Check the network connection and timeout, then retry."
+            elif status in (400, 404, 422):
+                guidance = "Check the selected model and request settings."
+            elif status is not None and status >= 500:
+                guidance = "The service is temporarily unavailable. Try again later."
+            else:
+                guidance = "Check API configuration and try again."
+            raise RuntimeError(prefix + guidance) from None
+
     def enrich_company(self, company_name: str) -> CompanyEnrichment:
-        response = self._client.chat.completions.create(
+        response = self._create_completion(
             model=self._model,
             response_format={"type": "json_object"},
             messages=[
@@ -83,7 +113,7 @@ class OpenAIEnrichmentProvider:
         if not company_names:
             return {}
 
-        response = self._client.chat.completions.create(
+        response = self._create_completion(
             model=self._model,
             response_format={"type": "json_object"},
             messages=[

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import io
 import time
+from dataclasses import replace
 from pathlib import Path
 from typing import Optional
 
@@ -9,6 +10,7 @@ import pandas as pd
 import streamlit as st
 
 from company_gtm_enricher.config import AppConfig
+from company_gtm_enricher.credentials_ui import render_api_keys
 from company_gtm_enricher.cost_estimator import (
     DEFAULT_PRICING_MODELS,
     CostEstimatorInputs,
@@ -22,17 +24,31 @@ from company_gtm_enricher.csv_tools import (
 )
 from company_gtm_enricher.job_runner import EnrichmentJob, start_enrichment_job
 from company_gtm_enricher.providers.factory import create_provider
+from company_gtm_enricher.people.job_runner import is_active as is_people_job_active
+from company_gtm_enricher.people.ui import render_people_page
 
 
 ACTIVE_JOB_STATUSES = {"running", "paused", "stopping"}
 
 
 def main() -> None:
-    config = AppConfig.from_env()
     job = st.session_state.get("enrichment_job")
 
     st.set_page_config(page_title="Company GTM Enricher", page_icon=":bar_chart:")
     st.title("Company GTM Enricher")
+    active = _is_job_active(job) or is_people_job_active(st.session_state.get("people_job"))
+    mode = st.sidebar.radio(
+        "Enrichment", ("Company facts", "People"),
+        disabled=active,
+    )
+    openai_key, serper_key = render_api_keys(disabled=active)
+    if mode == "People":
+        render_people_page(openai_api_key_override=openai_key, serper_api_key_override=serper_key)
+        return
+
+    config = AppConfig.from_env()
+    if openai_key:
+        config = replace(config, openai_api_key=openai_key)
     st.caption(
         "Upload a CSV of company names, enrich public GTM fields, and download a refreshed CSV."
     )

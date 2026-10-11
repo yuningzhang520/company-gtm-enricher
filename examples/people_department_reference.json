@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Ramp",
+    "name": "Zack Field",
+    "linkedin_url": "https://www.linkedin.com/in/zackeryfield",
+    "role_source_url": "https://ramp.com/authors/zack-field",
+    "expected_departments": ["Engineering"],
+    "expected_seniority": ["Senior Staff"]
+  },
+  {
+    "company": "CoreWeave",
+    "name": "Chen Goldberg",
+    "linkedin_url": "https://www.linkedin.com/in/goldbergchen",
+    "role_source_url": "https://www.coreweave.com/leadership/chen-goldberg",
+    "expected_departments": ["Engineering", "Product"],
+    "expected_seniority": ["EVP"]
+  },
+  {
+    "company": "CoreWeave",
+    "name": "Corey Sanders",
+    "linkedin_url": "https://www.linkedin.com/in/corey-sanders-842b72",
+    "role_source_url": "https://www.coreweave.com/news/coreweave-expands-mission-control-to-accelerate-enterprise-ai-adoption",
+    "expected_departments": ["Product"],
+    "expected_seniority": ["SVP"]
+  }
+]

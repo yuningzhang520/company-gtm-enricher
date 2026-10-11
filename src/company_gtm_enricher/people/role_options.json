@@ -1,0 +1,11 @@
+{
+  "departments": ["AI", "Product", "Infrastructure", "Engineering"],
+  "leadership_levels": ["VP", "Head", "Director", "Manager"],
+  "ic_levels": ["Distinguished", "Fellow", "Principal", "Staff", "Senior"],
+  "department_definitions": {
+    "AI": "AI and machine learning research, applied research, model development, and AI/ML engineering. Use evidence about the person's role; working at an AI company alone is insufficient.",
+    "Product": "Product management, product design, product operations, Product Marketing, and Product Partnerships, including embedded product/platform partnerships. Applied research alone does not establish Product membership; require evidence of one of the included functions.",
+    "Infrastructure": "Cloud, compute, storage, networking, platform infrastructure, SRE, and developer infrastructure. Include physical/data-center infrastructure when the supplied role explicitly concerns it.",
+    "Engineering": "Software, systems, hardware, and engineering leadership or individual contributor roles. Use the actual engineering function in the supplied evidence; a generic leader or partnerships title alone is insufficient."
+  }
+}

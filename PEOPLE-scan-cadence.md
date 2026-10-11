@@ -1,0 +1,23 @@
+# People scan cadence
+
+For this job-search workflow, begin with one full pass over the 55 companies. Choose ten active application targets and refresh those weekly; refresh the remaining companies every four weeks. Before contacting someone, inspect the linked profile and its current title manually. A new search result is not proof that an indexed job title is current. Grounded names, titles, and profile links with uncertain current employment remain in People as `employment_unconfirmed`; explicit former employment, person/company/title conflicts, and unsupported identity/title/profile evidence remain in Review. Rows retained after processing failures have Status `processing_failed`, so they can be distinguished from leads needing factual review.
+
+With the first pass's preferences and a ten-query cap, each company has ten planned queries: founders, C-level, and leadership/IC searches for each of four departments. Up to forty distinct returned profiles form one classification batch. That batch starts with one model request when profiles are available and may need bounded retries on the same search evidence. These are query and candidate budgets, not complete employee rosters.
+
+| Four-week cycle | Company runs | Planned searches before retries | Base model requests, up to | Model attempts with two retries, up to |
+| --- | ---: | ---: | ---: | ---: |
+| One complete refresh | 55 | 550 | 55 | 165 |
+| Three extra weekly refreshes for ten active targets | 30 | 300 | 30 | 90 |
+| Combined | 85 | 850 | 85 | 255 |
+
+The recorded 55-company batch used **550 search requests and 55 model attempts with retries disabled**. Those are historical observed counts, unchanged by the new defaults. In regular UI/CLI runs, the search client permits one retry per query, so the search-attempt ceiling is twice the planned-search count (up to 1,700 across this four-week cycle). Model retries reuse the already retrieved hits and do not add searches. The model-attempt ceiling above includes the production default of two retries; actual attempts depend on failures, available profiles, and early stops. No recurring jobs or automatic scheduling have been enabled.
+
+`PEOPLE_TIMEOUT_SECONDS` now defaults to **90 seconds per attempt**. `PEOPLE_LLM_MAX_RETRIES` defaults to `2` and accepts `0` through `2`, giving one to three total model attempts per batch. Only timeout/connection failures and HTTP 408, 409, 429 (excluding exhausted quota), or 5xx responses are retried, with one- and two-second waits. SDK implicit retries are disabled. Every attempted request is counted, including failed attempts; refusals and malformed/incomplete model responses do not trigger automatic retries.
+
+[Serper advertises 2,500 free queries](https://serper.dev/) without a credit card, checked on 2026-09-17. Treat that as an initial allowance, not a recurring monthly entitlement. The remaining allowance depends on previous account usage; this tool does not read the account balance. A full initial pass fits within a completely unused allowance. Track returned search credits alongside request attempts because unsuccessful requests can leave billing uncertain.
+
+OpenAI is billed separately. [Published standard API rates](https://developers.openai.com/api/docs/pricing), checked on 2026-09-17, list `gpt-5-mini` at $0.25 per million input tokens, $0.025 per million cached input tokens, and $2 per million output tokens. Estimate successful-response cost from the recorded token usage; reconcile actual charges in the provider dashboard. A timeout can leave billable usage unknown. Request counts alone do not establish a dollar bill.
+
+Start with two companies in flight, as in this batch. The tool reads search-index results through Serper; it does not open LinkedIn pages. If rate-limit or transport failures persist after the bounded retries, retain the evidence and retry only the failed classification batch later using saved hits where available, after any provider-specified cooldown. Authentication, exhausted quota, or model-configuration failures are not retried automatically and stop new work until corrected. A LinkedIn login or bot wall encountered during manual profile review should stay a manual review item; do not add a bypass or repeated page requests.
+
+After a few refreshes, compare newly useful names, changed titles, unresolved evidence, and cost per useful new contact. If weekly refreshes rarely change the shortlist, reduce them to every two weeks. A later narrow feature could reuse unchanged saved evidence for classification and expose the prior observation date; persistent caching and a scheduler are outside the current increment.

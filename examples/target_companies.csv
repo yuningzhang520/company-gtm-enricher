@@ -1,0 +1,56 @@
+input_name,lists
+spacexAI,ai_infra_labs
+CoreWeave,ai_infra_labs
+Nebius,ai_infra_labs
+Iren,ai_infra_labs
+Lambda,ai_infra_labs
+Perplexity,ai_infra_labs
+Decagon,ai_infra_labs;agent_execution
+Crusoe,ai_infra_labs
+Cohere,ai_infra_labs
+langchain,ai_infra_labs
+CrewAI,ai_infra_labs;agent_execution
+Opencode,ai_infra_labs;app_building
+ElevenLabs,ai_infra_labs
+Ollama,ai_infra_labs
+Midjourney,ai_infra_labs
+Sierra,ai_infra_labs;agent_execution
+Together AI,ai_infra_labs
+Runway,ai_infra_labs
+Replit,ai_infra_labs;app_building
+Harvey,ai_infra_labs;agent_execution
+Deepgram,ai_infra_labs
+Descript,ai_infra_labs
+Thinking Machines Lab,ai_infra_labs
+OpenAI,ai_infra_labs
+Anthropic,ai_infra_labs
+Cursor,ai_infra_labs;app_building
+Applied Intuition,ai_infra_labs
+Modal Labs,ai_infra_labs
+Ramp,ai_infra_labs
+Fireworks AI,ai_infra_labs
+Cognition (Cognition/Devin),ai_infra_labs;app_building
+Paraform,ai_infra_labs
+CREAO.ai,ai_infra_labs
+Writer.com (Writer),ai_infra_labs;agent_execution
+Vercel/v0,app_building
+Emergent,app_building
+Lovable,app_building
+Bolt,app_building
+Base44,app_building
+Augment,app_building
+Cline,app_building
+OpenHands,app_building
+Glean,agent_execution
+Legora,agent_execution
+Fin,agent_execution
+Pylon,agent_execution
+Dust,agent_execution
+Unify,agent_execution
+Rogo,agent_execution
+StackAI,agent_execution
+Hebbia,agent_execution
+Lindy,agent_execution
+Relevance AI,agent_execution
+Gumloop,agent_execution
+Clay,agent_execution

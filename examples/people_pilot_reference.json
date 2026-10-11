@@ -1,0 +1,38 @@
+[
+  {
+    "company": "LangChain",
+    "name": "Harrison Chase",
+    "linkedin_url": "https://www.linkedin.com/in/harrison-chase-961287118",
+    "role_source_url": "https://www.langchain.com/about"
+  },
+  {
+    "company": "LangChain",
+    "name": "Ankush Gola",
+    "linkedin_url": "https://www.linkedin.com/in/ankush-gola-77255866",
+    "role_source_url": "https://www.langchain.com/about"
+  },
+  {
+    "company": "Sierra",
+    "name": "Bret Taylor",
+    "linkedin_url": "https://www.linkedin.com/in/brettaylor",
+    "role_source_url": "https://jobs.ashbyhq.com/Sierra/149f368c-52d5-408f-ba26-ad888f318a00"
+  },
+  {
+    "company": "Sierra",
+    "name": "Clay Bavor",
+    "linkedin_url": "https://www.linkedin.com/in/claybavor",
+    "role_source_url": "https://sierra.ai/about"
+  },
+  {
+    "company": "Replit",
+    "name": "Amjad Masad",
+    "linkedin_url": "https://www.linkedin.com/in/amjadmasad",
+    "role_source_url": "https://replit.com/blog/author/amjad-masad"
+  },
+  {
+    "company": "Replit",
+    "name": "Haya Odeh",
+    "linkedin_url": "https://www.linkedin.com/in/haya-odeh-b0725928",
+    "role_source_url": "https://replit.com/about"
+  }
+]

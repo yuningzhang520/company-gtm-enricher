@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "dataset_id": "synthetic-people-extraction-contract-v1",
+  "synthetic": true,
+  "predeclared_at_utc": "2026-09-17T12:54:31Z",
+  "description": "Twelve fictional indexed-profile examples, declared before any model run on this fixture, for checking extraction, exact role mapping, and safe abstention. The company, people, profile identifiers, and employment statements are invented. These are contract cases, not verified leads or held-out real-company recall evidence.",
+  "limitations": [
+    "The example-* LinkedIn URLs are synthetic source identifiers; they have not been visited or verified and must not be treated as real profiles.",
+    "Successful classification measures agreement with these synthetic expectations only. It does not establish real-world precision, complete-roster recall, or current employment.",
+    "Expected title values are complete role phrases without employer, dates, or narrative. Original source text and exact source-ID binding must be retained separately.",
+    "Expected fields use exact comparison unless a case explicitly declares accepted_department_labels. That list recognizes equivalent accurate labels for an unselected research function; it does not allow mapping research into a selected department.",
+    "An unknown fallback is safe abstention, not a successful extraction or a recovered positive. Report correct labels, correct placement, and abstentions separately.",
+    "Expectations are fixed independently of model output. Do not revise them after a run to improve the score."
+  ],
+  "unknown_fallback": {
+    "bucket": "review",
+    "role_type": "unknown",
+    "unknown_title": "",
+    "unknown_department": "",
+    "unknown_seniority": "",
+    "uncertain_employment": "unclear",
+    "rules": [
+      "Return one source-bound observation for every hit; an omitted observation is an extraction-contract failure.",
+      "Keep the supported person name even when the title, department, or seniority cannot be established.",
+      "Use empty strings for unsupported text fields; never replace missing evidence with an expected answer from this fixture.",
+      "A Review fallback on a positive or deterministically excluded case is recorded as abstention, not exact-case success.",
+      "None of the Review or excluded cases may enter People, even if an alternative selected department or level would make it eligible."
+    ]
+  },
+  "company": {
+    "name": "Cedar Systems",
+    "domain": "cedar.example",
+    "lists": "synthetic-contract-fixture",
+    "aliases": []
+  },
+  "criteria": {
+    "founders": false,
+    "c_level": false,
+    "departments": ["Engineering", "Product"],
+    "leadership_levels": ["EVP", "SVP", "VP", "Head", "Director"],
+    "ic_levels": ["Staff", "Principal", "Senior Staff"],
+    "department_definitions": {
+      "Engineering": "Software, systems, hardware, and engineering leadership or individual contributor roles. Use the actual engineering function in the supplied evidence; a generic leader or partnerships title alone is insufficient.",
+      "Product": "Product management, product design, product operations, Product Marketing, and Product Partnerships, including embedded product/platform partnerships. Applied research alone does not establish Product membership; require evidence of one of the included functions."
+    }
+  },
+  "expected_bucket_counts": {"people": 7, "excluded": 2, "review": 3},
+  "cases": [
+    {
+      "id": "full_executive_vice_president",
+      "hit": {
+        "id": "synthetic-01",
+        "url": "https://www.linkedin.com/in/example-cedar-ava-pell",
+        "title": "Ava Pell - Executive Vice President of Engineering at Cedar Systems - LinkedIn",
+        "snippet": "Ava Pell is Executive Vice President of Engineering at Cedar Systems (cedar.example). She leads software delivery and the engineering organization."
+      },
+      "expected": {
+        "name": "Ava Pell",
+        "title": "Executive Vice President of Engineering",
+        "department": "Engineering",
+        "seniority": "EVP",
+        "role_type": "leadership",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "people"
+      },
+      "rationale": "The full Executive Vice President title maps to the explicitly selected EVP level, without dropping the Executive modifier or inferring a C-level role."
+    },
+    {
+      "id": "full_senior_vice_president",
+      "hit": {
+        "id": "synthetic-02",
+        "url": "https://www.linkedin.com/in/example-cedar-nico-vale",
+        "title": "Nico Vale - Senior Vice President of Engineering at Cedar Systems - LinkedIn",
+        "snippet": "Senior Vice President of Engineering at Cedar Systems. Nico Vale manages the distributed systems and developer tools teams. Company: cedar.example."
+      },
+      "expected": {
+        "name": "Nico Vale",
+        "title": "Senior Vice President of Engineering",
+        "department": "Engineering",
+        "seniority": "SVP",
+        "role_type": "leadership",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "people"
+      },
+      "rationale": "Senior Vice President is the selected SVP level, not VP. The modifier is meaningful even though both levels happen to be selected."
+    },
+    {
+      "id": "full_vice_president",
+      "hit": {
+        "id": "synthetic-03",
+        "url": "https://www.linkedin.com/in/example-cedar-mira-cove",
+        "title": "Mira Cove - Vice President of Product at Cedar Systems - LinkedIn",
+        "snippet": "Mira Cove is Vice President of Product at Cedar Systems (cedar.example), responsible for product management, roadmap planning, and customer discovery."
+      },
+      "expected": {
+        "name": "Mira Cove",
+        "title": "Vice President of Product",
+        "department": "Product",
+        "seniority": "VP",
+        "role_type": "leadership",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "people"
+      },
+      "rationale": "The full Vice President form maps to VP, with direct Product and employer evidence."
+    },
+    {
+      "id": "senior_director_is_not_director",
+      "hit": {
+        "id": "synthetic-04",
+        "url": "https://www.linkedin.com/in/example-cedar-theo-marsh",
+        "title": "Theo Marsh - Senior Director of Engineering at Cedar Systems - LinkedIn",
+        "snippet": "Senior Director of Engineering at Cedar Systems (cedar.example). Theo Marsh leads the runtime and release engineering teams."
+      },
+      "expected": {
+        "name": "Theo Marsh",
+        "title": "Senior Director of Engineering",
+        "department": "Engineering",
+        "seniority": "Senior Director",
+        "role_type": "leadership",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "excluded"
+      },
+      "rationale": "Senior Director is a clear level that is absent from the selected list. Preserve it and exclude deterministically; do not shorten it to the selected Director level."
+    },
+    {
+      "id": "product_marketing_under_broad_definition",
+      "hit": {
+        "id": "synthetic-05",
+        "url": "https://www.linkedin.com/in/example-cedar-leena-rowan",
+        "title": "Leena Rowan - Director of Product Marketing at Cedar Systems - LinkedIn",
+        "snippet": "Leena Rowan is Director of Product Marketing at Cedar Systems (cedar.example). She owns product positioning, launches, and sales enablement for the developer platform."
+      },
+      "expected": {
+        "name": "Leena Rowan",
+        "title": "Director of Product Marketing",
+        "department": "Product",
+        "seniority": "Director",
+        "role_type": "leadership",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "people"
+      },
+      "rationale": "The predeclared broad Product definition explicitly includes Product Marketing. This mapping is policy context, not an assertion about the employer's reporting structure."
+    },
+    {
+      "id": "product_partnerships_under_broad_definition",
+      "hit": {
+        "id": "synthetic-06",
+        "url": "https://www.linkedin.com/in/example-cedar-owen-firth",
+        "title": "Owen Firth - Head of Product Partnerships at Cedar Systems - LinkedIn",
+        "snippet": "Head of Product Partnerships at Cedar Systems. Owen Firth builds embedded platform integrations and partner product programs. Employer website: cedar.example."
+      },
+      "expected": {
+        "name": "Owen Firth",
+        "title": "Head of Product Partnerships",
+        "department": "Product",
+        "seniority": "Head",
+        "role_type": "leadership",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "people"
+      },
+      "rationale": "Product Partnerships is explicitly in the selected Product scope; generic partnerships alone would not establish Engineering membership."
+    },
+    {
+      "id": "applied_research_is_not_forced_into_product",
+      "hit": {
+        "id": "synthetic-07",
+        "url": "https://www.linkedin.com/in/example-cedar-sana-kestrel",
+        "title": "Sana Kestrel - Principal Applied Research Scientist at Cedar Systems - LinkedIn",
+        "snippet": "Sana Kestrel is Principal Applied Research Scientist at Cedar Systems (cedar.example). Her work concerns machine learning model research, vision benchmarks, and scientific publications."
+      },
+      "expected": {
+        "name": "Sana Kestrel",
+        "title": "Principal Applied Research Scientist",
+        "department": "AI",
+        "seniority": "Principal",
+        "role_type": "ic",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "excluded"
+      },
+      "accepted_department_labels": ["AI", "Research", "Applied Research", "AI Research", "Machine Learning", "Machine Learning Research"],
+      "rationale": "The evidence describes AI research, while only Engineering and Product are selected. Preserve an accurate unselected department instead of treating every technical role as Engineering or Product. No canonical research label was selected, so the explicit equivalent research labels are acceptable. Unknown department with Review is an abstention fallback."
+    },
+    {
+      "id": "explicit_former_employee",
+      "hit": {
+        "id": "synthetic-08",
+        "url": "https://www.linkedin.com/in/example-cedar-darin-pike",
+        "title": "Darin Pike - Former Senior Vice President of Engineering at Cedar Systems - LinkedIn",
+        "snippet": "Former Senior Vice President of Engineering at Cedar Systems (cedar.example), 2020-2024. Darin Pike left Cedar Systems in 2024 and now advises an independent robotics cooperative."
+      },
+      "expected": {
+        "name": "Darin Pike",
+        "title": "Senior Vice President of Engineering",
+        "department": "Engineering",
+        "seniority": "SVP",
+        "role_type": "leadership",
+        "current_employment": "former",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "review"
+      },
+      "rationale": "The named past role is extractable, but explicit former employment prevents a current-company People result. If the extractor returns an empty current title instead, record that as abstention while still requiring Review."
+    },
+    {
+      "id": "same_company_name_different_identity",
+      "hit": {
+        "id": "synthetic-09",
+        "url": "https://www.linkedin.com/in/example-cedar-ilya-ash",
+        "title": "Ilya Ash - Vice President of Engineering at Cedar Systems - LinkedIn",
+        "snippet": "Ilya Ash is Vice President of Engineering at Cedar Systems, a freight logistics consultancy. Employer website: cedar-logistics.example."
+      },
+      "expected": {
+        "name": "Ilya Ash",
+        "title": "Vice President of Engineering",
+        "department": "Engineering",
+        "seniority": "VP",
+        "role_type": "leadership",
+        "current_employment": "unclear",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "review"
+      },
+      "rationale": "The employer name matches but its explicit domain conflicts with cedar.example. No alias or evidence links the two domains. Do not assert current employment at the requested company from the shared name alone."
+    },
+    {
+      "id": "sparse_person_keeps_name_and_unknown_role",
+      "hit": {
+        "id": "synthetic-10",
+        "url": "https://www.linkedin.com/in/example-cedar-priya-lark",
+        "title": "Priya Lark - Cedar Systems - LinkedIn",
+        "snippet": "Priya Lark. Experience: Cedar Systems. Education: Maple Institute. Location: North Harbor. View profile and connections."
+      },
+      "expected": {
+        "name": "Priya Lark",
+        "title": "",
+        "department": "",
+        "seniority": "",
+        "role_type": "unknown",
+        "current_employment": "unclear",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "review"
+      },
+      "rationale": "The hit clearly names a person but supplies neither a title nor current employment evidence. Keep a source-bound observation and the name, with explicit unknown role fields."
+    },
+    {
+      "id": "complete_snippet_preserves_senior_staff",
+      "hit": {
+        "id": "synthetic-11",
+        "url": "https://www.linkedin.com/in/example-cedar-bex-norland",
+        "title": "Bex Norland - Staff Engineer at Cedar Systems - LinkedIn",
+        "snippet": "Bex Norland is Senior Staff Software Engineer at Cedar Systems (cedar.example). They design distributed storage components as an individual contributor."
+      },
+      "expected": {
+        "name": "Bex Norland",
+        "title": "Senior Staff Software Engineer",
+        "department": "Engineering",
+        "seniority": "Senior Staff",
+        "role_type": "ic",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "people"
+      },
+      "rationale": "The snippet provides a more complete explicit role than the abbreviated headline. Preserve Senior Staff exactly instead of dropping Senior to match the shorter headline."
+    },
+    {
+      "id": "principal_engineer_remains_individual_contributor",
+      "hit": {
+        "id": "synthetic-12",
+        "url": "https://www.linkedin.com/in/example-cedar-quinn-elm",
+        "title": "Quinn Elm - Principal Software Engineer at Cedar Systems - LinkedIn",
+        "snippet": "Principal Software Engineer at Cedar Systems (cedar.example). Quinn Elm leads architecture reviews, writes compiler code, and mentors engineers as an individual contributor."
+      },
+      "expected": {
+        "name": "Quinn Elm",
+        "title": "Principal Software Engineer",
+        "department": "Engineering",
+        "seniority": "Principal",
+        "role_type": "ic",
+        "current_employment": "current",
+        "is_founder": false,
+        "is_c_level": false,
+        "bucket": "people"
+      },
+      "rationale": "Leading architecture work does not turn an explicitly identified individual contributor into a people manager. Principal is separately selected as an IC level."
+    }
+  ]
+}

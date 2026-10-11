@@ -1,0 +1,18 @@
+{
+  "aliases": {
+    "VP": ["Vice President", "Vice-President"],
+    "SVP": ["Senior Vice President", "Senior Vice-President", "Senior VP", "Sr. Vice President", "Sr Vice President", "Sr. VP", "Sr VP"],
+    "EVP": ["Executive Vice President", "Executive Vice-President", "Executive VP"],
+    "Senior": ["Sr.", "Sr"],
+    "Junior": ["Jr.", "Jr"],
+    "Senior Director": ["Sr. Director", "Sr Director"],
+    "Senior Manager": ["Sr. Manager", "Sr Manager"],
+    "Senior Staff": ["Sr. Staff", "Sr Staff"],
+    "Senior Principal": ["Sr. Principal", "Sr Principal"]
+  },
+  "modifiers": ["Senior", "Junior", "Principal", "Staff", "Lead", "Associate", "Assistant", "Deputy", "Executive"],
+  "expansions": {
+    "SVP": "Senior VP",
+    "EVP": "Executive VP"
+  }
+}
